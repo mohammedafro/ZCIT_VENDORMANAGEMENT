@@ -1,0 +1,78 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Vendor',
+                typeNamePlural: 'Vendors',
+                title: { type: #STANDARD, value: 'VendorId' },
+                description: { type: #STANDARD, value: 'CompanyName' } } }
+                
+annotate view ZCIT_C_VENDOR with
+{
+  @UI.facet: [ { id: 'VendorDetails', 
+                 purpose: #STANDARD, 
+                 type: #IDENTIFICATION_REFERENCE, 
+                 label: 'Vendor Information', 
+                 position: 10 } ]
+
+  @UI: { lineItem:       [ { position: 10 } ],
+         identification: [ { position: 10 } ] }
+  VendorId;
+
+  @UI: { lineItem:       [ { position: 20 } ],
+         identification: [ { position: 20 } ] }
+  CompanyName;
+
+  @UI: { lineItem:       [ { position: 30 } ],
+         identification: [ { position: 30 } ] }
+  VendorType;
+
+  @UI: { lineItem:       [ { position: 40 } ],
+         identification: [ { position: 40 } ] }
+  Country;
+
+  /* PREMIUM FEATURE 1: Action Buttons & Dynamic Status Colors */
+  @UI: { lineItem:       [ { position: 50, criticality: 'StatusCriticality' },
+                           { type: #FOR_ACTION, dataAction: 'approveVendor', label: 'Approve Vendor', position: 10 },
+                           { type: #FOR_ACTION, dataAction: 'blockVendor',   label: 'Block Vendor',   position: 20 } ],
+         identification: [ { position: 50, criticality: 'StatusCriticality' },
+                           { type: #FOR_ACTION, dataAction: 'approveVendor', label: 'Approve Vendor', position: 10 },
+                           { type: #FOR_ACTION, dataAction: 'blockVendor',   label: 'Block Vendor',   position: 20 } ] }
+  Status;
+
+/* PREMIUM FEATURE 2: Visual Progress Bar for Performance Rating */
+  @UI: { lineItem:       [ { position: 60, type: #AS_DATAPOINT } ],
+         identification: [ { position: 60 } ],  /* <--- Removed AS_DATAPOINT here so you can type! */
+         dataPoint:      { visualization: #PROGRESS, targetValue: 100 } }
+  PerformanceRating;
+  /* The remaining fields will only show inside the Details page, keeping the main list clean */
+  @UI: { identification: [ { position: 70 } ] }
+  EmailAddress;
+
+  @UI: { identification: [ { position: 80 } ] }
+  PhoneNumber;
+
+  @UI: { identification: [ { position: 90 } ] }
+  Website;
+
+  @UI: { identification: [ { position: 100 } ] }
+  City;
+
+  /* Hide system tracking logic from the business user */
+  @UI.hidden: true
+  StatusCriticality;
+  
+  @UI.hidden: true
+  CreatedBy;
+  
+  @UI.hidden: true
+  CreatedAt;
+  
+  @UI.hidden: true
+  LastChangedBy;
+  
+  @UI.hidden: true
+  LastChangedAt;
+  
+  @UI.hidden: true
+  LocalLastChangedAt;
+}

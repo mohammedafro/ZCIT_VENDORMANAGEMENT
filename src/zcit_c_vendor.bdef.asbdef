@@ -1,0 +1,13 @@
+projection;
+strict ( 2 );
+
+define behavior for ZCIT_C_VENDOR alias Vendor
+{
+  use create;
+  use update;
+  use delete;
+
+  /* Expose our custom actions to the Fiori UI */
+  use action blockVendor;
+  use action approveVendor;
+}

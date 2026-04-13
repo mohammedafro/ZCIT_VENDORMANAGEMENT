@@ -1,0 +1,7 @@
+@EndUserText.label: 'Service Definition for Vendor Management'
+define service ZCIT_UI_VENDOR {
+  expose ZCIT_C_VENDOR      as Vendor;
+  expose ZCIT_I_VTYPE_VH    as VendorTypeVH;
+  expose ZCIT_I_VCOUNTRY_VH as CountryVH;
+  expose ZCIT_I_VSTAT_VH    as VendorStatusVH;
+}

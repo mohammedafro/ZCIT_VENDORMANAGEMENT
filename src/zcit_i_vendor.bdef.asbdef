@@ -1,0 +1,35 @@
+unmanaged implementation in class zbp_cit_i_vendor unique;
+strict ( 2 );
+
+define behavior for ZCIT_I_VENDOR alias Vendor
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  /* PREMIUM FEATURES: Custom Actions */
+  action blockVendor result [1] $self;
+  action approveVendor result [1] $self;
+
+  /* MAPPING: Tell the Unmanaged class how to link the view to the table */
+  mapping for zcit_vendor
+  {
+    VendorId           = vendor_id;
+    CompanyName        = company_name;
+    EmailAddress       = email_address;
+    PhoneNumber        = phone_number;
+    Website            = website;
+    Country            = country;
+    City               = city;
+    VendorType         = vendor_type;
+    Status             = status;
+    PerformanceRating  = performance_rating;
+    CreatedBy          = created_by;
+    CreatedAt          = created_at;
+    LastChangedBy      = last_changed_by;
+    LastChangedAt      = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
